@@ -2,41 +2,120 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
       body {
+        min-height: 100vh;
         display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
         font-family: Roboto, sans-serif;
       }
-      .key {
-        width: 300px;
-        position: relative;
-        top: 100px;
-        padding: 3rem 1.5rem 1rem 1.5rem;
-        font-size: 120%;
-        border-radius: 15px;
-        box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+      #app-card {
+        display: flex;
+        position: absolute;
+        top: 40px;
+        left: 60px;
+        font-size: 14px;
+        font-weight: 400;
       }
-      .key > .type {
+      #icon {
+        width: 60px;
+        height: 60px;
+        margin-right: 0.75rem;
+        background-image: url(https://cdn.flipperzero.one/flipper-app-logo.png);
+        background-size: contain;
+        border-radius: 10px;
+      }
+      h1 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 1.75rem;
+      }
+      h4 {
+        margin: 0.6rem 0;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      #key {
+        width: min(calc(100vw - 2rem), 380px);
+        position: relative;
+        margin-bottom: 2rem;
+        padding: 2.75rem 1rem 0rem 1rem;
+        font-size: 16px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 16px 1px #cbcbcb5e;
+      }
+      #key::after{
+        content: "";
+        position: absolute;
+        bottom: 3.5rem;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: #00000014;
+      }
+      #badge {
         position: absolute;
         top: 0;
         left: 0;
-        padding: 0.5rem 1.5rem;
-        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        font-size: 14px;
+        font-weight: 500;
         background: #ffa50080;
-        border-radius: 15px 0px;
+        border-radius: 10px 0px 15px 0px;
       }
       .line {
         display: flex;
         justify-content: space-between;
-        margin: 0.5rem 0;
+        margin: 1.25rem 0;
+        font-weight: 500;
+      }
+      .line:last-of-type {
+        margin-top: 2.25rem;
+      }
+      .line:last-of-type > span:first-of-type {
+        font-weight: 400;
+        color: #aaa;
+      }
+      .line:last-of-type > span:last-of-type {
+        font-weight: 500;
+      }
+      #open {
+        min-width: 175px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 3rem;
+        background: #589DFF;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        transition-duration: 300ms;
+        border-radius: 30px;
+      }
+      #open:hover {
+        background: #4983d5;
       }
     </style>
   </head>
   <body>
-    <div class="key">
-      <div class="type"></div>
+    <div id="app-card">
+      <div id="icon"></div>
+      <div>
+        <h4>Flipper</h4>
+        Organize data and keys on your Flipper Device
+      </div>
     </div>
+    <h1>Flipper Key</h1>
+    <div id="key">
+      <div id="badge"></div>
+    </div>
+    <a id="open">Download</a>
 
     <script>
       if (document.location.hash.length === 0) {
@@ -48,12 +127,12 @@
         console.log(params)
         for (const line of params) {
           if (line[0] === 'Key type') {
-            document.querySelector('.type').innerText = line[1]
+            document.querySelector('#badge').innerText = line[1]
           } else {
             const div = document.createElement('div')
             div.classList = 'line'
             div.innerHTML = `<b>${line[0]}:</b><span>${line[1]}</span>`
-            document.querySelector('.key').append(div)
+            document.querySelector('#key').append(div)
           }
         }
       }
