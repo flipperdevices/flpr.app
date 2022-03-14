@@ -247,7 +247,7 @@ SAK: ${params.sak}`
         } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
           document.querySelector('#get').href = 'https://testflight.apple.com/join/oLyR7YeT'
         } else {
-          document.querySelector('#get').href = '/'
+          document.querySelector('#get').href = location.origin
         }
 
         document.querySelector('#badge').classList.add(params.extension)
