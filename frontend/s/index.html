@@ -14,6 +14,7 @@
         align-items: center;
         justify-content: center;
         font-family: Roboto, sans-serif;
+        background: #fbfbfb;
       }
       #app-card {
         display: grid;
@@ -246,7 +247,7 @@ SAK: ${params.sak}`
         } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
           document.querySelector('#get').href = 'https://testflight.apple.com/join/oLyR7YeT'
         } else {
-          document.querySelector('#get').href = 'https://flpr.app'
+          document.querySelector('#get').href = '/'
         }
 
         document.querySelector('#badge').classList.add(params.extension)

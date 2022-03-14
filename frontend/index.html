@@ -2,13 +2,71 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script>
-      if (document.location.hash.length === 0) {
-        document.location.href = 'https://flipperzero.one'
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Roboto, sans-serif;
+        background: #fbfbfb;
       }
-    </script>
+      h1 {
+        margin: 1rem 0 1.25rem 0;
+        font-size: 22px;
+        font-weight: 500;
+      }
+      h2 {
+        margin: 0.5rem 0 2.25rem 0;
+        font-size: 22px;
+        font-weight: 400;
+        text-align: center;
+      }
+      #logo {
+        width: 148px;
+        height: 148px;
+        margin-right: 0.75rem;
+        background-image: url(https://cdn.flipperzero.one/flipper-app-logo.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+      }
+      #links {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      #links > a {
+        margin: 1rem 0;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      #links > a:first-of-type {
+        width: 224px;
+        height: 75px;
+        background-image: url(https://cdn.flipperzero.one/App_Store_Badge_svg.svg);
+      }
+      #links > a:last-of-type {
+        width: 242px;
+        height: 74px;
+        background-image: url(https://cdn.flipperzero.one/Google_Play_Badge__svg.svg);
+      }
+    </style>
   </head>
   <body>
-    <h1>This is a service page for Flipper mobile apps.</h1>
+    <div id="logo"></div>
+    <h1>Flipper</h1>
+    <h2>Organize data and keys on your Flipper Device</h2>
+    <div id="links">
+      <a href="https://testflight.apple.com/join/oLyR7YeT"></a>
+      <a href="https://play.google.com/apps/testing/com.flipperdevices.app"></a>
+    </div>
   </body>
 </html>
