@@ -184,7 +184,7 @@
           keytype: '',
           data: ''
         }
-        const urlParams = document.location.hash.slice(1).replaceAll('+', ' ').split('&')
+        const urlParams = document.location.hash.slice(1).replace('%2F', '/').replaceAll('+', ' ').split('&')
         for (const e of urlParams) {
           const s = e.split('=')
           params[s[0].replaceAll(' ', '').toLowerCase()] = s[1]
@@ -193,10 +193,13 @@
         params.name = path[1]
         params.extension = path[2]
 
-        let badgeText = '', typeText = '', fileString = `Filetype: ${params.filetype}
-Version: ${params.version}
-Key type: ${params.keytype}
-Data: ${params.data}`
+        let badgeText = '', typeText = '', fileString = ''
+
+        for (let i = 1; i < urlParams.length; i++) {
+          let kv = urlParams[i].split('=')
+          fileString += `${kv[0]}: ${kv[1]}
+`
+        }
         
         switch (params.extension) {
           case 'ibtn':
@@ -210,32 +213,14 @@ Data: ${params.data}`
           case 'subghz':
             badgeText = 'Sub-GHz'
             typeText = 'Protocol:'
-            fileString = `Filetype: ${params.filetype}
-Version: ${params.version}
-Frequency: ${params.frequency}
-Preset: ${params.preset}
-Protocol: ${params.protocol}
-Bit: ${params.bit}
-Key: ${params.key}`
-            if (params.te) {
-              fileString += `
-TE: ${params.te}`
-            }
             break
           case 'nfc':
             badgeText = 'NFC'
             typeText = 'Device Type:'
-            fileString = `Filetype: ${params.filetype}
-Version: ${params.version}
-Device type: ${params.devicetype}
-UID: ${params.uid}
-ATQA: ${params.atqa}
-SAK: ${params.sak}`
             break
           case 'ir':
             badgeText = 'Infrared'
             typeText = 'Protocol:'
-            document.querySelector('#open').style.display = 'none'
             break
           default:
             badgeText = 'Unknown'
