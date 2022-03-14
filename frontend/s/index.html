@@ -160,7 +160,7 @@
           <h2>Flipper</h2>
           Organize data and keys on your Flipper Device
         </div>
-        <a>Get the App</a>
+        <a id="get">Get the App</a>
       </div>
     </div>
     <h1>Flipper Key</h1>
@@ -191,8 +191,6 @@
         const path = params.path.split(/[/\.]/g)
         params.name = path[1]
         params.extension = path[2]
-        console.log(urlParams)
-        console.log(params)
 
         let badgeText = '', typeText = '', fileString = `Filetype: ${params.filetype}
 Version: ${params.version}
@@ -241,6 +239,14 @@ SAK: ${params.sak}`
           default:
             badgeText = 'Unknown'
             document.querySelector('#type').style.display = 'none'
+        }
+
+        if (/android/i.test(navigator.userAgent)) {
+          document.querySelector('#get').href = 'https://play.google.com/apps/testing/com.flipperdevices.app'
+        } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+          document.querySelector('#get').href = 'https://testflight.apple.com/join/oLyR7YeT'
+        } else {
+          document.querySelector('#get').href = 'https://flpr.app'
         }
 
         document.querySelector('#badge').classList.add(params.extension)
