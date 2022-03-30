@@ -176,7 +176,7 @@
 
     <script>
       if (document.location.hash.length === 0) {
-        document.location.href = 'https://flipperzero.one'
+        document.location.href = location.origin
       } else {
         const params = {
           path: '',
@@ -227,23 +227,36 @@
             document.querySelector('#type').style.display = 'none'
         }
 
-        if (/android/i.test(navigator.userAgent)) {
-          document.querySelector('#get').href = 'https://play.google.com/apps/testing/com.flipperdevices.app'
-        } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-          document.querySelector('#get').href = 'https://testflight.apple.com/join/oLyR7YeT'
-        } else {
-          document.querySelector('#get').href = location.origin
-        }
-
         document.querySelector('#badge').classList.add(params.extension)
         document.querySelector('#badge').innerText = badgeText
         document.querySelector('#name').innerText = params.name
         document.querySelector('#type > span:first-of-type').innerText = typeText
         document.querySelector('#type > span:last-of-type').innerText = params.keytype || params.devicetype || params.protocol
 
-        document.querySelector('#open').innerText = 'Download'
-        document.querySelector('#open').download = params.name + '.' + params.extension
-        document.querySelector('#open').href = 'data:text/plain,' + fileString
+
+        if (/android/i.test(navigator.userAgent)) {
+          document.querySelector('#get').href = 'https://play.google.com/store/apps/details?id=com.flipperdevices.app'
+        } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+          document.querySelector('#get').href = 'https://testflight.apple.com/join/oLyR7YeT'
+        } else {
+          document.querySelector('#get').href = location.origin
+        }
+
+        if (/android/i.test(navigator.userAgent)) {
+          document.querySelector('#open').innerText = 'Open in App'
+
+          const keyUrl = location.href
+          const keyUrlEncoded = encodeURIComponent(keyUrl)
+          const playLink = 'https://play.google.com/store/apps/details?id=com.flipperdevices.app&url=' + keyUrlEncoded
+          const playLinkEncoded = encodeURIComponent(playLink)
+          
+          const url = 'intent:open?' + keyUrlEncoded + '#Intent;scheme=flipperkey;package=com.flipperdevices.app;action=android.intent.action.VIEW;S.browser_fallback_url=' + playLinkEncoded + ';B.branch_intent=true;end;'
+          document.querySelector('#open').href = url
+        } else {
+          document.querySelector('#open').innerText = 'Download'
+          document.querySelector('#open').download = params.name + '.' + params.extension
+          document.querySelector('#open').href = 'data:text/plain,' + fileString
+        }
       }
     </script>
   </body>
