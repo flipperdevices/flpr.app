@@ -177,8 +177,25 @@
     <a id="open"></a>
 
     <script>
+      let os = 'other'
+      const storelinks = {
+        android: 'https://play.google.com/store/apps/details?id=com.flipperdevices.app',
+        ios: 'https://apps.apple.com/app/flipper-mobile-app/id1534655259'
+      }
+      if (/android/i.test(navigator.userAgent)) {
+        os = 'android'
+      } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        os = 'ios'
+      }
+
       if (document.location.hash.length === 0) {
-        document.location.href = location.origin
+        if (os === 'android') {
+          document.location.href = storelinks.android
+        } else if (os === 'ios') {
+          document.location.href = storelinks.ios
+        } else {
+          document.location.href = location.origin
+        }
       } else {
         const params = {
           path: '',
@@ -236,20 +253,20 @@
         document.querySelector('#type > span:last-of-type').innerText = params.keytype || params.devicetype || params.protocol
 
 
-        if (/android/i.test(navigator.userAgent)) {
-          document.querySelector('#get').href = 'https://play.google.com/store/apps/details?id=com.flipperdevices.app'
-        } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-          document.querySelector('#get').href = 'https://apps.apple.com/app/flipper-mobile-app/id1534655259'
+        if (os === 'android') {
+          document.querySelector('#get').href = storelinks.android
+        } else if (os === 'ios') {
+          document.querySelector('#get').href = storelinks.ios
         } else {
           document.querySelector('#get').href = location.origin
         }
 
-        if (/android/i.test(navigator.userAgent)) {
+        if (os === 'android') {
           document.querySelector('#open').innerText = 'Open in App'
 
           const keyUrl = location.href
           const keyUrlEncoded = encodeURIComponent(keyUrl)
-          const playLink = 'https://play.google.com/store/apps/details?id=com.flipperdevices.app&url=' + keyUrlEncoded
+          const playLink = storelinks.android + '&url=' + keyUrlEncoded
           const playLinkEncoded = encodeURIComponent(playLink)
           
           const url = 'intent:open?' + keyUrlEncoded + '#Intent;scheme=flipperkey;package=com.flipperdevices.app;action=android.intent.action.VIEW;S.browser_fallback_url=' + playLinkEncoded + ';B.branch_intent=true;end;'

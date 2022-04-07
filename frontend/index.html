@@ -70,5 +70,24 @@
       <a href="https://apps.apple.com/app/flipper-mobile-app/id1534655259"></a>
       <a href="https://play.google.com/store/apps/details?id=com.flipperdevices.app"></a>
     </div>
+
+    <script>
+      let os = 'other'
+      const storelinks = {
+        android: 'https://play.google.com/store/apps/details?id=com.flipperdevices.app',
+        ios: 'https://apps.apple.com/app/flipper-mobile-app/id1534655259'
+      }
+      if (/android/i.test(navigator.userAgent)) {
+        os = 'android'
+      } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        os = 'ios'
+      }
+      
+      if (os === 'android') {
+        document.location.href = storelinks.android
+      } else if (os === 'ios') {
+        document.location.href = storelinks.ios
+      }
+    </script>
   </body>
 </html>
