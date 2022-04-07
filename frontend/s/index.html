@@ -189,13 +189,7 @@
       }
 
       if (document.location.hash.length === 0) {
-        if (os === 'android') {
-          document.location.href = storelinks.android
-        } else if (os === 'ios') {
-          document.location.href = storelinks.ios
-        } else {
-          document.location.href = location.origin
-        }
+        document.location.href = location.origin
       } else {
         const params = {
           path: '',
