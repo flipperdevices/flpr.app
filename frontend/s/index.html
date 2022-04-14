@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-itunes-app" content="app-id=1534655259, app-argument=https://flpr.app/s/#">
+    <script preload>
+      document.querySelector('head > meta[name="apple-itunes-app"]').content = 'app-id=1534655259, app-argument=https://flpr.app/s/' + location.hash
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
