@@ -94,7 +94,7 @@
         background-color: #fff493;
         background-image: url(https://cdn.flipperzero.one/RFID_icon.svg);
       }
-      #badge.subghz {
+      #badge.sub {
         background-color: #a5f4bf;
         background-image: url(https://cdn.flipperzero.one/sub_ghz_icon.svg);
       }
@@ -207,8 +207,8 @@
           params[s[0].replaceAll(' ', '').toLowerCase()] = s[1]
         }
         const path = params.path.split(/[/\.]/g)
-        params.name = path[1]
-        params.extension = path[2]
+        params.name = path[path.length - 2]
+        params.extension = path[path.length - 1]
 
         let badgeText = '', typeText = '', fileString = ''
 
@@ -227,7 +227,7 @@
             badgeText = 'RFID 125'
             typeText = 'Key Type:'
             break
-          case 'subghz':
+          case 'sub':
             badgeText = 'Sub-GHz'
             typeText = 'Protocol:'
             break
