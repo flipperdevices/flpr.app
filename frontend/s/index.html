@@ -272,7 +272,7 @@
         } else {
           document.querySelector('#open').innerText = 'Download'
           document.querySelector('#open').download = params.name + '.' + params.extension
-          document.querySelector('#open').href = 'data:text/plain,' + fileString
+          document.querySelector('#open').href = 'data:application/octet-stream,' + fileString
         }
       }
     </script>
