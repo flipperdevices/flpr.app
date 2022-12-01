@@ -211,8 +211,8 @@
         const path = params.path.split(/[/\.]/g)
         params.name = path[path.length - 2]
         params.extension = path[path.length - 1]
-        params.key = decodeURIComponent(params.key)
-        console.log(params)
+        params.key = decodeURIComponent(params.key).replaceAll('_', '/').replaceAll('-', '+')
+        // console.log(params)
 
         let badgeText = '', typeText = ''
         
@@ -267,7 +267,6 @@
             }
           })
           .then(async buffer => {
-            console.log(buffer)
             const key = await crypto.subtle.importKey(
               'raw',
               Uint8Array.from(window.atob(params.key), c => c.charCodeAt(0)),
@@ -278,7 +277,6 @@
             const iv = buffer.slice(0, 12)
             const tag = buffer.slice(-16)
             const encrypted = buffer.slice(12)
-            console.log({key, iv, tag, encrypted})
             return crypto.subtle.decrypt(
               {
                 name: 'AES-GCM',
@@ -289,8 +287,6 @@
             )
           })
           .then(decrypted => {
-            console.log(decrypted)
-
             open.innerText = 'Download'
             open.download = params.name + '.' + params.extension
             open.href = URL.createObjectURL(new Blob([ decrypted ], { type: 'application/octet-stream' }))
