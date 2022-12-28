@@ -266,7 +266,7 @@
           const playLink = storelinks.android + '&url=' + keyUrlEncoded
           const playLinkEncoded = encodeURIComponent(playLink)
           
-          const url = 'intent:open?' + keyUrlEncoded + '#Intent;S.browser_fallback_url=' + playLinkEncoded + ';scheme=flipperkey;package=com.flipperdevices.app;package=com.flipperdevices.app.dev;action=android.intent.action.VIEW;B.branch_intent=true;end;'
+          const url = 'intent:open?' + keyUrlEncoded + '#Intent;S.browser_fallback_url=' + playLinkEncoded + ';scheme=flipperkey;package=com.flipperdevices.app;action=android.intent.action.VIEW;B.branch_intent=true;end;'
           document.querySelector('#open').href = url
         } else {
           document.querySelector('#open').innerText = 'Download'
