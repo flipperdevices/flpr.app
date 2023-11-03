@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="apple-itunes-app" content="app-id=1534655259, app-argument=https://flpr.app/o/mfkey32/#">
+  <script preload>
+    document.querySelector('head > meta[name="apple-itunes-app"]').content = 'app-id=1534655259, app-argument=https://flpr.app/o/mfkey32/' + location.hash
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Roboto, sans-serif;
+      background: #fbfbfb;
+    }
+
+    #app-card {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-gap: 10px;
+      position: absolute;
+      top: 40px;
+      left: 60px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    #app-card>div:last-of-type {
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    #app-card a {
+      color: #589dff;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 0.75rem;
+      background-image: url(https://cdn.flipperzero.one/flipper-app-logo.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 1.75rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    #open {
+      min-width: 175px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: #589dff;
+      color: #ffffff;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition-duration: 300ms;
+      border-radius: 30px;
+    }
+
+    #open:hover {
+      background: #4983d5;
+    }
+
+    @media (max-width: 768px) {
+      #app-card {
+        top: 12px;
+        left: 0px;
+        padding: 0 9px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-height: 468px) {
+      body {
+        padding-top: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app-card">
+    <div id="icon"></div>
+    <div>
+      <div>
+        <h2>Flipper</h2>
+        Organize data and keys on your Flipper Device
+      </div>
+      <a id="get">Get the App</a>
+    </div>
+  </div>
+  <h1>mfkey32</h1>
+  <a id="open"></a>
+
+  <script>
+    let os = 'other'
+    const storelinks = {
+      android: 'https://play.google.com/store/apps/details?id=com.flipperdevices.app',
+      ios: 'https://apps.apple.com/app/flipper-mobile-app/id1534655259'
+    }
+    if (/android/i.test(navigator.userAgent)) {
+      os = 'android'
+    } else if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      os = 'ios'
+    }
+
+    if (os === 'android') {
+      document.querySelector('#get').href = storelinks.android
+      document.querySelector('#open').innerText = 'Open in App'
+
+      const keyUrlEncoded = encodeURIComponent(location.href)
+      const playLink = storelinks.android + '&url=' + keyUrlEncoded
+      const playLinkEncoded = encodeURIComponent(playLink)
+
+      const url = 'intent:open?' + keyUrlEncoded + '#Intent;S.browser_fallback_url=' + playLinkEncoded + ';scheme=flipperkey;package=com.flipperdevices.app;action=android.intent.action.VIEW;B.branch_intent=true;end;'
+      document.querySelector('#open').href = url
+    } else {
+      document.location.href = location.origin
+    }
+  </script>
+</body>
+
+</html>
