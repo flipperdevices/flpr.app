@@ -52,7 +52,17 @@ jobs:
         run: |
           echo ${{ steps.docker_build.outputs.digest }}
 
-      - name: 'Trigger k8s to use new image'
+      - name: 'Trigger k8s to use new dev image'
+        if: ${{ steps.tag.outputs.image_tag == '0.0.0' }}
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          repository: ${{ secrets.INFRASTRUCTURE_REPO_DEV }}
+          token: ${{ secrets.K8S_GITHUB_PAT }}
+          event-type: flpr-app-deploy
+          client-payload: '{"image_tag": "${{steps.tag.outputs.image_tag}}"}'
+
+      - name: 'Trigger k8s to use new prod image'
+        if: ${{ steps.tag.outputs.image_tag != '0.0.0' }}
         uses: peter-evans/repository-dispatch@v2
         with:
           repository: ${{ secrets.INFRASTRUCTURE_REPO }}
